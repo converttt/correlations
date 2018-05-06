@@ -12,7 +12,7 @@ The upper table above shows that over the month of April (one month) BTC/USD and
 The correlation algorithm is published on [GeeksForGeeks](https://www.geeksforgeeks.org/program-find-correlation-coefficient/)
 
 ## What does this program do
-Script **pipeline** retrieves historical data and calculates correlation for the previous month. Launch it on a monthly basis to process new data for the previous month.
+Script **pipeline** retrieves historical data and calculates correlation for the past month, 3 months, 6 months and 1 year. Launch it on a monthly basis to process new data.
 The server works as a reverse proxy to get the correlations for the requested month from the dataset with processed data.
 
 Feel free to use the token in the config file, it is of a test account.
