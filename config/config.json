@@ -1,0 +1,8 @@
+{
+  "hostname": "https://api.data.world/v0/",
+  "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcm9kLXVzZXItY2xpZW50OmJlYmljaXl1ciIsImlzcyI6ImFnZW50OmJlYmljaXl1cjo6NGZhMTdkZTAtNjhhYS00NDQ1LTg3YjUtZjZmNWFkMjNlNzM4IiwiaWF0IjoxNTI1NTI2Nzk5LCJyb2xlIjpbInVzZXJfYXBpX3JlYWQiLCJ1c2VyX2FwaV93cml0ZSJdLCJnZW5lcmFsLXB1cnBvc2UiOnRydWV9.HFHq_acvoZavyB8FRaY8oEV6wzRCCeOChFXjVXzlZ5_luDGWbrOKJH_A2yfX-mcy03G82eATGHuVaKqlCKMjbw",
+  "user_id": "bebiciyur",
+  "dataset_id": "correlation-dataset",
+  "stream_id": "stream_1",
+  "server_port": 8080
+}

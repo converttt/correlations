@@ -1,0 +1,27 @@
+{
+  "name": "correlations",
+  "version": "0.0.0",
+  "description": "Correlation calculation and data analysis of historical market data of ETH and BTC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "pipeline": "node ./scripts/pipeline.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/converttt/correlations.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/converttt/correlations/issues"
+  },
+  "homepage": "https://github.com/converttt/correlations#readme",
+  "dependencies": {
+    "connect": "^3.6.6",
+    "js-yaml": "^3.11.0",
+    "moment": "^2.22.1",
+    "promise": "^8.0.1",
+    "swagger-tools": "^0.10.3"
+  }
+}
