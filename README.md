@@ -6,7 +6,7 @@ The correlation coefficient ranges between -1 and +1. A correlation of +1 implie
 
 ![alt text](https://github.com/converttt/correlations/raw/master/media/screen-1.png 'An example of calculated data')
 
-The upper table above shows that over the month of April (one month) BTC/USD and ETH/USD had a very strong positive correlation of 0.96. This implies that when the BTC/USD rallies, the ETH/USD has also rallied 96% of the time. Over the past six months, the correlation was weaker (0.63), but in the long run (one year) the two currency pairs still have a strong correlation.
+The upper table above shows that over the month of April (one month) BTC/USD and ETH/USD had a very strong positive correlation of 0.99. This implies that when the BTC/USD rallies, the ETH/USD has also rallied 99% of the time. Over the past six months, the correlation was weaker (0.51), but in the long run (one year) the two currency pairs still have a strong correlation.
 
 ## How to calculate correlation
 The correlation algorithm is published on [GeeksForGeeks](https://www.geeksforgeeks.org/program-find-correlation-coefficient/)

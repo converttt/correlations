@@ -23,17 +23,17 @@ const endDate = moment()
 
 // 6 months ago time
 const time6 = moment()
-    .subtract(7, 'months')
+    .subtract(6, 'months')
     .startOf('month');
 
 // 3 months ago time
 const time3 = moment()
-    .subtract(4, 'months')
+    .subtract(3, 'months')
     .startOf('month');
 
 // 1 month ago time
 const time1 = moment()
-    .subtract(2, 'months')
+    .subtract(1, 'months')
     .startOf('month');
 
 // Find correlations for 4 timeframes: 1 year, 6 months, 3 and 1 month
