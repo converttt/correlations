@@ -65,6 +65,12 @@ function findCorrelations(parsedData){
             const hashKey = parsedData[i].data[j].date;
             const priceUsd = parsedData[i].data[j].price_usd;
 
+            // Validate the data
+            if (!validateDate(hashKey) || !validateNumber(priceUsd)){
+                // The data are not valid, skip them from the calculations
+                continue
+            }
+
             if (!(hashKey in structuredData)){
                 structuredData[hashKey] = {}
             }
@@ -162,6 +168,18 @@ function findCorrelations(parsedData){
     log.info('Correlation is calculated');
 
     return Promise.resolve(stream);
+}
+
+// Validate the date format
+// d - string, example: 2017-04-05
+function validateDate(d, format = 'YYYY-MM-DD'){
+    return moment(d, format).isValid();
+}
+
+// Validate that argument is a number
+// d - decimal
+function validateNumber(d){
+    return Number(d) === d;
 }
 
 // Pull the historical data of the given currency
