@@ -52,6 +52,8 @@ function findCorrelations(parsedData){
 
     let structuredData = {};
 
+    // Strcture two array with the historical data into a hashmap
+    // The key of the hashmap is a date
     for (let i = 0; i < parsedData.length; i++){
 
         const symbol = parsedData[i].symbol;
@@ -73,9 +75,12 @@ function findCorrelations(parsedData){
 
     for (let i = 0; i < hashDates.length; i++){
 
+        // Validate that for the current date we have the data for the two analysed currencies
         if (Object.keys(structuredData[hashDates[i]]).length != 2){
             continue;
         }
+
+        // Calculate correlations for 1, 3, 6 and 12 months
 
         const currentTime = moment(hashDates[i], 'YYYY-MM-DD').format();
         const currentRecord = structuredData[hashDates[i]];
@@ -124,6 +129,7 @@ function findCorrelations(parsedData){
     const cor3 = (coef3 * btcEth3 - btcSum3 * ethSum3) / (Math.sqrt(coef3 * btcSum3_2 - Math.pow(btcSum3, 2)) * Math.sqrt(coef3 * ethSum3_2 - Math.pow(ethSum3, 2)));
     const cor1 = (coef1 * btcEth1 - btcSum1 * ethSum1) / (Math.sqrt(coef1 * btcSum1_2 - Math.pow(btcSum1, 2)) * Math.sqrt(coef1 * ethSum1_2 - Math.pow(ethSum1, 2)));
 
+    // Structure the data to submit them to correlations dataset
     const stream = [
         {
             "BTC/USD": "1 Month",
@@ -209,7 +215,7 @@ function streamData(stream){
 
         const options = {
             hostname: 'api.data.world',
-            path: `/v0/streams/${config.user_id}/${config.dataset_id}/stream-1`,
+            path: `/v0/streams/${config.user_id}/${config.dataset_id}/${config.stream_id}`,
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${config.token}`,
@@ -229,7 +235,7 @@ function streamData(stream){
                 if (rawData){
                     const parsedData = JSON.parse(rawData);
                     if (parsedData.code != 200){
-                        return reject(`Couldn\'t stream data to stream-1 with error ${parsedData.message}`);
+                        return reject(`Couldn\'t stream data to ${config.stream_id} with error ${parsedData.message}`);
                     }
                 }
                 log.info('Data are successfully pushed');
@@ -238,7 +244,7 @@ function streamData(stream){
 
         })
         .on('error', (e) => {
-            reject('Couldn\'t stream data to stream-1');
+            reject(`Couldn\'t stream data to ${config.stream_id}`);
         });
 
         req.write(JSON.stringify(stream));
