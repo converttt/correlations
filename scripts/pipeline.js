@@ -1,5 +1,5 @@
 // Launch this script on a monthly basis to retrieve new data and calculate correlations for the previous month
-// Logs are written to stdout and can be streamed to any monitoring tools like Zabbix ot ELK
+// Logs are written to stdout and can be streamed to any monitoring tools
 
 const Promise = require('promise');
 const moment = require('moment');
@@ -37,9 +37,10 @@ const time1 = moment()
     .subtract(1, 'months')
     .startOf('month');
 
-// Find correlations for 4 timeframes: 1 year, 6 months, 3 and 1 month
+// Find correlations for 4 time frames: 1 year, 6 months, 3 and 1 month
 // The algorithm is published here: https://www.geeksforgeeks.org/program-find-correlation-coefficient/
 // The output is a json object with the processed data
+// parsedData - an array with 2 hashmaps, [{symbol:eth, data:[]}, {symbol:btc, data:[]}]
 function findCorrelations(parsedData){
     let btcSum12 = 0, btcSum6 = 0, btcSum3 = 0, btcSum1 = 0;
     let btcSum12_2 = 0, btcSum6_2 = 0, btcSum3_2 = 0, btcSum1_2 = 0;
@@ -163,8 +164,9 @@ function findCorrelations(parsedData){
     return Promise.resolve(stream);
 }
 
+// Pull the historical data of the given currency
+// symbol - string, eth ot btc
 function retrieveData(symbol){
-
     return new Promise(function(resolve, reject){
 
         log.info(`Fetching data of currency ${symbol} for the period from ${startDate} to ${endDate}`);
@@ -208,6 +210,8 @@ function retrieveData(symbol){
 
 };
 
+// Save processed data to the database
+// stream - an array with json objects, example: [{BTC/USD:1 Month,From: YYYYMMDD,To:YYYYMMDD,ETH/USD:cor1}]
 function streamData(stream){
 
     return new Promise(function(resolve, reject){
@@ -254,11 +258,19 @@ function streamData(stream){
 
 }
 
+// The script's flow
+// Asynchronously retrieve the historical data for eth and btc
 Promise.all([retrieveData('btc'), retrieveData('eth')])
+    // when all requests are fulfilled we can make our calculations
     .then(findCorrelations)
+    // when caclulations are done, we save data
+    // each json object can be stored only via a separate request
+    // therefore we send asynchronous single requests for each json object
     .then(function(stream){
         return Promise.all(stream.map(streamData));
     })
+    // catching errors
+    // errors are logged with ERROR word and can be caught with a monitoring tool or alert system
     .catch(function(error) {
         log.error(error);
     });
