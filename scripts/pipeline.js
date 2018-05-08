@@ -1,4 +1,5 @@
 // Launch this script on a monthly basis to retrieve new data and calculate correlations for the previous month
+// Logs are written to stdout and can be streamed to any monitoring tools like Zabbix ot ELK
 
 const Promise = require('promise');
 const moment = require('moment');

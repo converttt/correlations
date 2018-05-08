@@ -1,3 +1,7 @@
+// A web server
+// Available interfaces are described in api api/swagger.yaml
+// Logs are written to stdout and can be streamed to any monitoring tools like Zabbix ot ELK
+
 const http = require('http');
 const log = require('./core/log');
 const fs = require('fs');

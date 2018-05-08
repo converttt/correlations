@@ -25,6 +25,7 @@ function validate(forYear, forMonth){
 
 // Retrieve processed data for the requested month
 function queryData(forYear, forMonth){
+    // Data can be stored and retrieved from cache in order to increase the performance and eliminate the third-party
     return new Promise(function(resolve, reject){
 
         const queryDate = moment(`${forYear}${forMonth}`, 'YYYYM')
