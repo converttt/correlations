@@ -16,3 +16,10 @@ Script **pipeline** retrieves historical data and calculates correlation for the
 The server works as a reverse proxy to get the correlations for the requested month from the dataset with processed data.
 
 Feel free to use the token in the config file, it is of a test account.
+
+## OpenAPI specification
+OpenAPI specification for the reverse proxy server is documented and should be available by the following url when the server is launched: http://localhost:{serverPort}/docs.
+
+Currently available interfaces:
+http://localhost:{serverPort}/v0/monitor
+http://localhost:{serverPort}/v0/data
