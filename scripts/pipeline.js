@@ -100,6 +100,7 @@ function findCorrelations(parsedData){
         btcEth12 += currentRecord.btc * currentRecord.eth;
         coef12 += 1;
 
+        // Validate the record for 6 Months correlation
         if (currentTime.unix() >= time6.unix()){
 
             btcSum6 += currentRecord.btc;
@@ -110,6 +111,8 @@ function findCorrelations(parsedData){
             coef6 += 1;
 
         }
+
+        // Validate the record for 3 Months correlation
         if (currentTime.unix() >= time3.unix()){
 
             btcSum3 += currentRecord.btc;
@@ -120,6 +123,8 @@ function findCorrelations(parsedData){
             coef3 += 1;
 
         }
+
+        // Validate the record for 1 Month correlation
         if (currentTime.unix() >= time1.unix()){
 
             btcSum1 += currentRecord.btc;
