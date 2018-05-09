@@ -90,7 +90,7 @@ function findCorrelations(parsedData){
 
         // Calculate correlations for 1, 3, 6 and 12 months
 
-        const currentTime = moment(hashDates[i], 'YYYY-MM-DD').format();
+        const currentTime = moment(hashDates[i], 'YYYY-MM-DD');
         const currentRecord = structuredData[hashDates[i]];
 
         btcSum12 += currentRecord.btc;
@@ -100,7 +100,7 @@ function findCorrelations(parsedData){
         btcEth12 += currentRecord.btc * currentRecord.eth;
         coef12 += 1;
 
-        if (currentTime >= time6.format()){
+        if (currentTime.unix() >= time6.unix()){
 
             btcSum6 += currentRecord.btc;
             btcSum6_2 += Math.pow(currentRecord.btc, 2);
@@ -110,7 +110,7 @@ function findCorrelations(parsedData){
             coef6 += 1;
 
         }
-        if (currentTime >= time3.format()){
+        if (currentTime.unix() >= time3.unix()){
 
             btcSum3 += currentRecord.btc;
             btcSum3_2 += Math.pow(currentRecord.btc, 2);
@@ -120,7 +120,7 @@ function findCorrelations(parsedData){
             coef3 += 1;
 
         }
-        if (currentTime >= time1.format()){
+        if (currentTime.unix() >= time1.unix()){
 
             btcSum1 += currentRecord.btc;
             btcSum1_2 += Math.pow(currentRecord.btc, 2);
@@ -173,7 +173,9 @@ function findCorrelations(parsedData){
 // Validate the date format
 // d - string, example: 2017-04-05
 function validateDate(d, format = 'YYYY-MM-DD'){
-    return moment(d, format).isValid();
+    const current = moment().startOf('month');
+    const m = moment(d, format);
+    return m.isValid() && m.unix() < current.unix();
 }
 
 // Validate that argument is a number
