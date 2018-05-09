@@ -21,5 +21,5 @@ Feel free to use the token in the config file, it is of a test account.
 OpenAPI specification for the reverse proxy server is documented and should be available by the following url when the server is launched: http://localhost:{serverPort}/docs.
 
 Currently available interfaces are:
-http://localhost:{serverPort}/v0/monitor
-http://localhost:{serverPort}/v0/data
+http://localhost:{serverPort}/v0/monitor;
+http://localhost:{serverPort}/v0/data.
