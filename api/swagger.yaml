@@ -19,9 +19,9 @@ paths:
       summary: "For monitoring"
       responses:
         200:
-          description: "all is well"
+          description: "All is well"
         default:
-          description: "unexpected error"
+          description: "Unexpected error"
   /data:
     x-swagger-router-controller: "data"
     get:
@@ -33,21 +33,14 @@ paths:
       produces:
       - "application/json"
       parameters:
-      - name: "forYear"
+      - name: "date"
         in: "query"
-        description: "A year in a format YYYY"
+        description: "A date in a format YYYYMM"
         required: true
-        type: "integer"
-        format: "int32"
-      - name: "forMonth"
-        in: "query"
-        description: "A month in a format MM"
-        required: true
-        type: "integer"
-        format: "int32"
+        type: "string"
       responses:
         200:
-          description: "successful operation"
+          description: "Successful operation"
           schema:
             $ref: "#/definitions/Data"
         400:

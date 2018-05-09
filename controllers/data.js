@@ -2,14 +2,13 @@ const log = require ('./../core/log');
 var data = require('./../services/dataService');
 
 function getData(req, res){
-    const forYear = req.swagger.params['forYear'].value;
-    const forMonth = req.swagger.params['forMonth'].value;
+    const getDate = req.swagger.params['date'].value;
 
-    log.info(`Received GET /v0/data?forYear=${forYear}&forMonth=${forMonth}`);
+    log.info(`Received GET /v0/data?date=${getDate}`);
 
-    data.validate(forYear, forMonth)
+    data.validate(getDate)
         .then(function(){
-            return data.queryData(forYear, forMonth);
+            return data.queryData(getDate);
         })
         .then(function(rawData){
             log.info (`Responding with 200`);
@@ -19,7 +18,7 @@ function getData(req, res){
         .catch(function(error){
             log.info (`Responding with 400: ${error}`);
             res.statusCode = 400;
-            res.end(error);
+            res.end(JSON.stringify({error: `${error}`}));
         });
 }
 

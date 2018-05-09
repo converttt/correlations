@@ -5,30 +5,36 @@ const https = require('https');
 const config = require('./../config/config.json');
 
 // Validate the user's input
-function validate(forYear, forMonth){
+// getDate - string, format: YYYYMM
+function validate(getDate){
 
-    forYear = parseInt(forYear);
-    forMonth = parseInt(forMonth);
+    const m = moment(getDate, 'YYYYMM');
+    const current = moment().startOf('month');
 
-    const currentYear = parseInt(moment().format('YYYY'));
-
-    if (currentYear < forYear || 2000 > forYear){
-        return Promise.reject('A year parameter is out of range, should be 2000 <= forYear <= currentYear');
+    if (!m.isValid()){
+        return Promise.reject('The date is invalid');
     }
 
-    if (forMonth > 12 || forMonth < 1){
-        return Promise.reject('A month parameter is out of range, should be 1 <= forMonth <= 12');
+    if (m.unix() >= current.unix()){
+        return Promise.reject('The date should be in the past');
+    }
+
+    const year = parseInt(m.format('YYYY'));
+    const currentYear = parseInt(current.format('YYYY'));
+
+    if (currentYear < year || 2017 > year){
+        return Promise.reject('A year parameter is out of range, should be 2017 <= forYear <= currentYear');
     }
 
     return Promise.resolve();
 }
 
-// Retrieve processed data for the requested month
-function queryData(forYear, forMonth){
-    // Data can be stored and retrieved from cache in order to increase the performance and eliminate the third-party
+// Retrieve processed data for the requested date
+function queryData(getDate){
+    // Data can be stored and retrieved from cache in order to increase the performance
     return new Promise(function(resolve, reject){
 
-        const queryDate = moment(`${forYear}${forMonth}`, 'YYYYM')
+        const queryDate = moment(`${getDate}`, 'YYYYM')
             .endOf('month')
             .format('YYYY-MM-DD');
 
